@@ -1,14 +1,17 @@
 <div>
   <div class="jumbotron">
     <div class="profile-photo">
-      <img src="assets/user.png" width="200" height="200">
+      <img src="assets/user.png" width="200" height="200" (click)="openStory(content)">
       <p> Ime: {{ name }} | Prezime: {{ surname }}</p>
-      <button>prati</button><button>otprati</button><button (click)="openStory(content)"> show story </button>
+      <button (click)="openStory(content)"> show story </button>
     </div>
   </div>
   <div class="jumbotron">
     <input type="file" (change)="onFileChanged($event)">
-
+  </div>
+  <div class="jumbotron" style="overflow-x: auto">
+    <h3> My photos </h3> <hr>
+    <img *ngFor="let img of imageSources" src="{{img}}" width="300" height="300">
   </div>
   <div class="profile-content">
 

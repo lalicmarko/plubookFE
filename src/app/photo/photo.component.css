@@ -1,6 +1,9 @@
 .photo-container {
-  width: 900px;
-  height: 350px;
+  width: 500px;
+  height: 250px;
+  margin-left: 30px;
+  /*background-color: red;*/
+  padding-bottom: 20px;
 }
 
 .photo-description {
@@ -13,9 +16,10 @@
 
 .photo-actions {
   width: 300px;
-  height: 350px;
+  height: 150px;
   float: left;
   position: relative;
+  overflow-y: auto;
   /*background-color: blue;*/
 }
 

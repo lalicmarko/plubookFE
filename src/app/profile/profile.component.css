@@ -4,11 +4,14 @@
   margin: 0 auto;
   /*background-color: black;*/
 }
+.profile-photo img:hover {
+  background-color: #4CAF50;
+  cursor: pointer;
+}
 .profile-description {
 
 }
 .profile-content {
 
 }
-
 

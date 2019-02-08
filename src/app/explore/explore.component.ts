@@ -8,14 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class ExploreComponent implements OnInit {
 
   toShow = false;
+  photoToShow;
+
   photos = [
-    'baba',
-    'bababa',
-    '33333',
-    'wwrw',
-    'asdas',
-    '52fssf',
-    'popopopo'
+    'assets/photo1.jpg',
+    'assets/photo2.jpg',
+    'assets/photo3.jpg',
+    'assets/photo1.jpg'
   ];
 
   private profileToShow = {};
@@ -34,6 +33,12 @@ export class ExploreComponent implements OnInit {
   showProfile(profile) {
     this.toShow = true;
     this.profileToShow = profile;
+    this.photoToShow = false;
   }
 
+  previewPhoto(photo) {
+    this.photoToShow = photo;
+  }
+  sharePhoto(photoToShow) {
+  }
 }

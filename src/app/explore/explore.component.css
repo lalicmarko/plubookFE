@@ -3,6 +3,20 @@
   height: 600px;
   float: left;
 }
+.side-profiles li:hover {
+  cursor: pointer;
+}
 .single-profile-view {
+  width: 300px;
   float: left;
+}
+.single-profile-view p:hover {
+  cursor: pointer;
+}
+.single-photo-view {
+  float: left;
+  height: 350px;
+}
+button:hover {
+  cursor: pointer;
 }

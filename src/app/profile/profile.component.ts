@@ -13,6 +13,8 @@ export class ProfileComponent implements OnInit {
     'assets/photo1.jpg',
     'assets/photo2.jpg',
     'assets/photo2.jpg',
+    'assets/photo3.jpg',
+    'assets/photo3.jpg',
     'assets/photo3.jpg'
   ];
 

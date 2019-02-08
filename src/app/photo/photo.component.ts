@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import $ from 'jquery';
 import {DatePipe} from '@angular/common';
-import {concat} from 'rxjs';
 
 @Component({
   selector: 'app-photo',
@@ -28,7 +26,6 @@ export class PhotoComponent implements OnInit {
       this.comments.push(newCommentWithDate);
       console.log(date);
     }
-    $('#input').val('');
 
     console.log('comments:', this.comments);
   }

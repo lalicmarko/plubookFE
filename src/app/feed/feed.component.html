@@ -1,12 +1,6 @@
 <p> FEED </p> <hr>
-<app-photo
-[autor]="'Autor broj 1'"
-[photoUrl]="'assets/photo1.jpg'">
-</app-photo> <hr> <br>
-<app-photo
-  [autor]="'Autor broj 2'"
-  [photoUrl]="'assets/photo2.jpg'"></app-photo> <hr> <br>
-<app-photo
-  [autor]="'Autor broj 3'"
-  [photoUrl]="'assets/photo3.jpg'"></app-photo> <hr> <br>
+<div class="feed">
+  <app-photo *ngFor="let post of posts" [autor]="post.autor" [photoUrl]="post.imgUrl"></app-photo>
+</div>
+
 

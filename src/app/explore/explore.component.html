@@ -1,3 +1,4 @@
+
 <div class="side-profiles">
   <h3>Comunity </h3><hr>
   <ul>
@@ -8,12 +9,21 @@
   <div *ngIf="toShow">
     <h3> {{ profileToShow }} </h3><hr>
     <img src="assets/user.png" width="200" height="200">
+    <br>
     <button onclick="followUser()"> Zaprati </button>
-    <button onclick="unfollowUser()"> Odprati </button> <hr><br>
+    <button onclick="unfollowUser()"> Odprati </button>
     <p> Slike korisnika: </p> <hr>
     <div *ngFor="let photo of photos">
-      <p> {{ photo }}</p>
+      <p (click)="previewPhoto(photo)"> {{ photo }}</p>
     </div>
-
+  </div>
+</div>
+<div class="single-photo-view">
+  <div *ngIf="photoToShow">
+    <h3> {{ photoToShow }} </h3><hr>
+    <img src="{{photoToShow}}" width="200" height="200">
+    <br><br>
+    <button style="width: 100px; margin: 0 auto;" onclick="sharePhoto(photoToShow)"> Share </button>
+    <hr>
   </div>
 </div>
