@@ -1,0 +1,25 @@
+.photo-container {
+  width: 900px;
+  height: 350px;
+}
+
+.photo-description {
+  width: 350px;
+  height: 350px;
+  position: relative;
+  float: left;
+  /*background-color: red;*/
+}
+
+.photo-actions {
+  width: 300px;
+  height: 350px;
+  float: left;
+  position: relative;
+  /*background-color: blue;*/
+}
+
+.photo {
+  width: 300px;
+  height: 300px;
+}

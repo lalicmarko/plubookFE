@@ -1,0 +1,41 @@
+<div>
+  <div class="jumbotron">
+    <div class="profile-photo">
+      <img src="assets/user.png" width="200" height="200">
+      <p> Ime: {{ name }} | Prezime: {{ surname }}</p>
+      <button>prati</button><button>otprati</button><button (click)="openStory(content)"> show story </button>
+    </div>
+  </div>
+  <div class="jumbotron">
+  </div>
+  <div class="profile-content">
+
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>One fine body&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<style>
+  .dark-modal .modal-content {
+    background-color: #292b2c;
+    color: white;
+  }
+  .dark-modal .close {
+    color: white;
+  }
+  .light-blue-backdrop {
+    background-color: #5cb3fd;
+  }
+</style>

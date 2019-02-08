@@ -1,0 +1,47 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span style="flex: 1 1 auto;">
+      <ul>
+        <li><a routerLink="/">PLUbook</a></li>
+        <li><a class="material-icons" routerLink="/feed"> contacts </a></li>
+        <li><a class="material-icons" routerLink="/chat"> message </a></li>
+        <li><a class="material-icons" routerLink="/profile"> face </a></li>
+        <li><a class="material-icons" routerLink="/settings"> settings </a></li>
+      </ul>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<style>
+  mat-toolbar {
+    background-color: #333;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .active {
+    background-color: #4CAF50;
+  }
+
+  /* Change the link color to #111 (black) on hover */
+  li a:hover {
+    background-color: #111;
+  }
+</style>

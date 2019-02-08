@@ -1,0 +1,16 @@
+<div class="photo-container">
+  <div class="photo-description">
+    <p>Autor: {{ autor }} </p>
+    <img class="photo" src="{{ photoUrl }}">
+  </div>
+  <div class="photo-actions">
+    <button> like </button>
+    <button> dislike </button>
+    <p> Dodaj komentar </p>
+    <input id="inputComments" #input type="text" (keyup.enter)="addComment(input.value)">
+    <p> Komentari: </p>
+    <ul>
+      <li *ngFor="let comment of comments">{{comment}}</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<!--<textarea id="chat" class="chat" style="width: 200px; height: 300px;"></textarea><br>-->
+<table id="friends-list" class="table table-striped" style="margin-top: 20px;">
+  <thead>
+  <tr>
+    <th>Friends online</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let contact of contacts">
+  <tr (click)="selectContact(contact)">
+    <td>{{contact}}</td>
+  </tr>
+  </tbody>
+</table>
+<table id="conversation-chat" class="table table-striped" style="margin-top: 20px;">
+  <thead>
+  <tr>
+    <th>Chat with: {{ selectedChat }}</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let greeting of greetings">
+  <tr>
+    <td>{{greeting}}</td>
+  </tr>
+  </tbody>
+
+  <input id="input" type="text" #input (keyup.enter)="sendMessage(input.value)"/>
+  <button (click)="sendMessage('parametar')"> Send message </button>
+</table>

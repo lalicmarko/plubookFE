@@ -1,0 +1,14 @@
+#friends-list {
+  width: 300px;
+  float: left;
+  /*background-color: blue;*/
+}
+
+#conversation-chat {
+  width: 400px;
+  float: left;
+  margin-left: 50px;
+  /*background-color: red;*/
+}
+tr { cursor: pointer; }
+.highlight { background: yellow; }
