@@ -7,20 +7,32 @@
     </div>
   </div>
   <div class="jumbotron">
+    <input type="file" (change)="onFileChanged($event)">
+
   </div>
   <div class="profile-content">
 
   </div>
 </div>
+
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title">Modal title</h4>
+    <h4 class="modal-title">Story korisnika: {{ name }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>One fine body&hellip;</p>
+    <!--<img src="assets/photo1.jpg" width="600" height="600">-->
+    <slideshow [height]="height"
+               [minHeight]="'525px'"
+               [autoPlay]="true"
+               [showArrows]="false"
+               [autoPlayInterval]="1000"
+               [imageUrls]="imageSources"
+               [lazyLoad]="imageSources?.length > 1"
+               [autoPlayWaitForLazyLoad]="true">
+    </slideshow>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>

@@ -9,6 +9,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProfileComponent implements OnInit {
 
+  imageSources: string[] = [
+    'assets/photo1.jpg',
+    'assets/photo2.jpg',
+    'assets/photo2.jpg',
+    'assets/photo3.jpg'
+  ];
+
   @Input()
   name: string;
   @Input()
@@ -17,13 +24,17 @@ export class ProfileComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.name = 'Ime autora';
-    this.surname = 'Prezime autora';
+    this.name = 'Darko';
+    this.surname = 'PM';
   }
 
   openStory(content) {
     this.modalService.open(content, { size: 'lg'});
-    console.log('opening modal for story preview');
+  }
+
+  onFileChanged(event) {
+    const file = event.target.files[0];
+    console.log(file);
   }
 
 }
