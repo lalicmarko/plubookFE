@@ -11,7 +11,7 @@ import {DataService} from '../shared/services/data.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private username: string;
+  private email: string;
   private password: string;
 
   constructor(private http: HttpClient, private router: Router,
@@ -22,17 +22,18 @@ export class LoginComponent implements OnInit {
 
   login() {
     const body = {
-      'username': this.username,
+      'email': this.email,
       'password': this.password
     };
 
     this.http.post(RESTAPI.getSignInURL(), body).subscribe(
       (response: LoginDTO) => {
-        console.log('LOGIN RESPONSE: ' + JSON.stringify(response));
         if (response) {
           if (response.token) {
             localStorage.setItem('X-AUTH-TOKEN', response.token);
             this.dataService.changeLoggedUser(response.user);
+            console.log('************************');
+            this.router.navigateByUrl('/feed');
           }
         }
       },

@@ -2,7 +2,7 @@
   <div class="jumbotron">
     <div class="profile-photo">
       <img src="assets/user.png" width="200" height="200" (click)="openStory(content)">
-      <p> Ime: {{ name }} | Prezime: {{ surname }}</p>
+      <p> Ime: {{ loggedUser.fistName }} | Prezime: {{ loggedUser.lastName }}</p>
       <button (click)="openStory(content)"> show story </button>
     </div>
   </div>
@@ -11,7 +11,7 @@
   </div>
   <div class="jumbotron" style="overflow-x: auto">
     <h3> My photos </h3> <hr>
-    <img *ngFor="let img of imageSources" src="{{img}}" width="300" height="300">
+    <img *ngFor="let post of loggedUser.posts" src="http://localhost{{post.photo}}" width="300" height="300">
   </div>
   <div class="profile-content">
 

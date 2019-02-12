@@ -1,5 +1,8 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {DataService} from '../shared/services/data.service';
+import {User} from '../shared/models/dto/user.model';
+import {Post} from '../shared/models/dto/post.model';
 
 @Component({
   selector: 'app-profile',
@@ -9,25 +12,16 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ProfileComponent implements OnInit {
 
-  imageSources: string[] = [
-    'assets/photo1.jpg',
-    'assets/photo2.jpg',
-    'assets/photo2.jpg',
-    'assets/photo3.jpg',
-    'assets/photo3.jpg',
-    'assets/photo3.jpg'
-  ];
+  loggedUser: User;
 
-  @Input()
-  name: string;
-  @Input()
-  surname: string;
-
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+              private dataService: DataService) {
+    this.dataService.loggedUser.subscribe(val => {
+      this.loggedUser = val;
+    });
+  }
 
   ngOnInit() {
-    this.name = 'Darko';
-    this.surname = 'PM';
   }
 
   openStory(content) {

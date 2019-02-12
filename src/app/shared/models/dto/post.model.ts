@@ -2,8 +2,8 @@ export class Post {
   id: number;
   title: string;
   description: string;
-  imageUrl: string;
-  createdAt: string;
+  photo: string;
+  createdTime: string;
   updatedAt: string;
   totalLikes: number;
   totalComments: number;

@@ -74,7 +74,7 @@ export class ChatComponent implements OnInit {
   }
 
   connect() {
-    const ws = new SockJS('http://localhost:8082/endpoint');
+    const ws = new SockJS('http://localhost:8080/endpoint');
     this.stompClient = Stomp.over(ws);
     const that = this;
     this.stompClient.connect({},  () => {

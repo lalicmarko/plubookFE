@@ -2,19 +2,22 @@
 <div class="side-profiles">
   <h3>Comunity </h3><hr>
   <ul>
-    <li *ngFor="let profile of profiles" (click)="showProfile(profile)"> {{ profile }}</li>
+    <li
+      *ngFor="let profile of profiles" (click)="showProfile(profile)">
+        {{ profile.firstName }} {{ profile.lastName }}
+    </li>
   </ul>
 </div>
 <div class="single-profile-view">
   <div *ngIf="toShow">
-    <h3> {{ profileToShow }} </h3><hr>
+    <h3> {{ profileToShow.firstName }} </h3><hr>
     <img src="assets/user.png" width="200" height="200">
     <br>
-    <button onclick="followUser()"> Zaprati </button>
-    <button onclick="unfollowUser()"> Odprati </button>
+    <button *ngIf="followingIds.indexOf(profileToShow.id) === -1" (click)="followUser(profileToShow.id)"> Zaprati </button>
+    <button onclick="unfollowUser()"> Otprati </button>
     <p> Slike korisnika: </p> <hr>
-    <div *ngFor="let photo of photos">
-      <p (click)="previewPhoto(photo)"> {{ photo }}</p>
+    <div *ngFor="let post of profileToShow.posts">
+      <p (click)="previewPhoto(post)"> {{ post.title }} - {{ post.createdTime }}</p>
     </div>
   </div>
 </div>

@@ -15,8 +15,10 @@ import {DatePipe} from '@angular/common';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import {LoginComponent} from './login/login.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ExploreComponent } from './explore/explore.component';
+import {TokenInterceptor} from '../core/interceptors/token.interceptor';
+import {AuthGuard} from '../core/guards/auth.guard';
 
 
 const appRoutes: Routes = [
@@ -65,11 +67,17 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     SlideshowModule,
     RouterModule.forRoot(appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     )
     // other imports here
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

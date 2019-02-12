@@ -1,7 +1,7 @@
 export abstract class RESTAPI {
-  static baseUrl = 'http://localhost:8082';
+  static baseUrl = 'http://localhost:8080';
   static photoServerUrl = 'http://localhost:1234/WebServer/Documents';
-  static socketUrl = 'http://localhost:8082' + '/socket';
+  static socketUrl = 'http://localhost:8080' + '/socket';
 
   // SIGN UP
   public static getSignUpURL() {
@@ -10,7 +10,7 @@ export abstract class RESTAPI {
 
   // SIGN IN
   public static getSignInURL() {
-    return this.baseUrl + '/user/login';
+    return this.baseUrl + '/auth/login';
   }
 
   // ACTIVATE
