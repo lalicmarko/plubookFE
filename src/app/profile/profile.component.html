@@ -8,6 +8,12 @@
   </div>
   <div class="jumbotron">
     <input type="file" (change)="onFileChanged($event)">
+    <br>
+    <br>
+    <img [src]="imgURL" height="200" width="200" *ngIf="imgURL">
+    <br>
+    <br>
+    <button (click)="uploadImage()" class="btn btn-primary">Upload</button>
   </div>
   <div class="jumbotron" style="overflow-x: auto">
     <h3> My photos </h3> <hr>
@@ -31,7 +37,7 @@
                [minHeight]="'525px'"
                [autoPlay]="true"
                [showArrows]="false"
-               [autoPlayInterval]="1000"
+               [autoPlayInterval]="interval"
                [imageUrls]="imageSources"
                [lazyLoad]="imageSources?.length > 1"
                [autoPlayWaitForLazyLoad]="true">

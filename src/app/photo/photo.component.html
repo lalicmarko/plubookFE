@@ -1,16 +1,18 @@
 <div class="photo-container">
   <div class="photo-description">
-    <p>Autor: {{ autor }} </p>
-    <img class="photo" src="{{ photoUrl }}">
+    <p>Autor: {{ post.owner.firstName }} {{ post.owner.lastName }} </p>
+    <p>Title: {{ post.title }}</p>
+    <img class="photo" src="http://localhost{{ post.photo }}">
   </div>
   <div class="photo-actions">
-    <button> like </button>
+    <button (click)="addLike()"> like </button>
     <button> dislike </button>
+    <p>Komentara: {{ post.totalCommments }} Lajkova: {{ post.totalLikes }}</p>
     <p> Dodaj komentar </p>
     <input id="inputComments" #input type="text" (keyup.enter)="addComment(input.value)">
     <p> Komentari: </p>
     <ul>
-      <li *ngFor="let comment of comments">{{comment}}</li>
+      <li *ngFor="let comment of post.comments"> {{ comment.content }} </li>
     </ul>
   </div>
 </div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../shared/models/dto/user.model';
+import {Post} from '../shared/models/dto/post.model';
 
 @Component({
   selector: 'app-feed',
@@ -6,32 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
-  posts = [
-    {
-      autor : 'Marko',
-      imgUrl : 'assets/photo1.jpg'
-    },
-    {
-      autor : 'Blarko',
-      imgUrl : 'assets/photo2.jpg'
-    },
-    {
-      autor : 'Zarko',
-      imgUrl : 'assets/photo3.jpg'
-    },
-    {
-      autor : 'Dole',
-      imgUrl : 'assets/photo2.jpg'
-    },
-    {
-      autor : 'Dole',
-      imgUrl : 'assets/photo2.jpg'
-    }
 
-  ];
+  private posts: Post[];
+
   constructor() { }
 
   ngOnInit() {
+    this.posts = JSON.parse(localStorage.getItem('otherPosts'));
+    console.log(this.posts);
   }
 
 }

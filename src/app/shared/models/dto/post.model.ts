@@ -10,4 +10,5 @@ export class Post {
   comments: Comment[];
   likes: any[];
   shared: boolean;
+  totalCommments: number;
 }

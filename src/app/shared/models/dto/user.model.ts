@@ -5,11 +5,10 @@ export class User {
   firstName: string;
   lastName: string;
   email: string;
-  username: string;
   password: string;
   profileImageUrl: string;
   online: boolean;
-
+  postsOfOtherUsers: Post[];
   followers: User[];
   following: User[];
   posts: Post[];

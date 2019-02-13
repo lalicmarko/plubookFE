@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {Post} from '../shared/models/dto/post.model';
+import {HttpClient} from '@angular/common/http';
+import {RESTAPI} from '../shared/rest-api-calls';
 
 @Component({
   selector: 'app-photo',
@@ -11,23 +14,41 @@ export class PhotoComponent implements OnInit {
   comments: string[] = [];
   // private photoUrl = 'https://images.unsplash.com/photo-1531804055935-76f44d7c3621?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80';
   @Input()
-  private photoUrl;
-  @Input()
-  private autor;
+  private post: Post;
 
-  constructor(public datepipe: DatePipe) {
+  constructor(public datepipe: DatePipe, public http: HttpClient) {
   }
 
   addComment(comment) {
     if (comment) {
-      let newCommentWithDate = comment.toString();
-      const date = this.datepipe.transform(new Date(), 'HH:mm yyyy-MM-dd');
-      newCommentWithDate = newCommentWithDate.concat(date);
-      this.comments.push(newCommentWithDate);
-      console.log(date);
+      const params = {
+        postId: this.post.id,
+        content: comment
+      };
+      this.http.post(RESTAPI.getPostCommentUrl(), params).subscribe(
+        res => {
+          console.log(res);
+          this.post.totalCommments += 1;
+          this.post.comments.push(res);
+        }, error1 => {
+          console.log(error1);
+        }
+      );
     }
 
     console.log('comments:', this.comments);
+  }
+
+  addLike () {
+    const params = {
+      postId: this.post.id
+    };
+    this.http.get(RESTAPI.getLikePostURL(), {params: params}).subscribe(
+      res => {
+        console.log(res);
+        this.post.totalLikes += 1;
+      }
+    );
   }
 
   ngOnInit() {

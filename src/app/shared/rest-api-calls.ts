@@ -55,7 +55,7 @@ export abstract class RESTAPI {
 
   // LIKE POST
   public static getLikePostURL() {
-    return this.baseUrl + '/post/addLikeToPost';
+    return this.baseUrl + '/post/addLike';
   }
 
   // UNLIKE POST
@@ -70,7 +70,7 @@ export abstract class RESTAPI {
 
   // POST COMMENT
   public static getPostCommentUrl() {
-    return this.baseUrl + '/post/addCommentToPost';
+    return this.baseUrl + '/post/addComment';
   }
 
   // GET FRIEND POSTS

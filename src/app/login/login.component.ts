@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
         if (response) {
           if (response.token) {
             localStorage.setItem('X-AUTH-TOKEN', response.token);
-            localStorage.setItem('loggedUser', JSON.stringify(response.user))
+            localStorage.setItem('loggedUser', JSON.stringify(response.user));
+            localStorage.setItem('otherPosts', JSON.stringify(response.postsOfOtherUsers));
             this.dataService.changeLoggedUser(response.user);
             console.log('************************');
             this.router.navigateByUrl('/feed');

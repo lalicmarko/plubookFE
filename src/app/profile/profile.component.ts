@@ -3,6 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from '../shared/services/data.service';
 import {User} from '../shared/models/dto/user.model';
 import {Post} from '../shared/models/dto/post.model';
+import {HttpClient} from '@angular/common/http';
+import {RESTAPI} from '../shared/rest-api-calls';
 
 @Component({
   selector: 'app-profile',
@@ -13,12 +15,23 @@ import {Post} from '../shared/models/dto/post.model';
 export class ProfileComponent implements OnInit {
 
   loggedUser: User;
+  private interval;
+  private imgURL;
+  private base64;
+  imageSources = [
+    'assets/photo1.jpg',
+    'assets/photo2.jpg',
+    'assets/photo3.jpg',
+    'assets/photo1.jpg',
+    'assets/photo2.jpg'
+  ];
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private http: HttpClient) {
   }
 
   ngOnInit() {
     this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    this.interval  = localStorage.getItem('storyDur');
   }
 
   openStory(content) {
@@ -27,7 +40,27 @@ export class ProfileComponent implements OnInit {
 
   onFileChanged(event) {
     const file = event.target.files[0];
-    console.log(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (_event) => {
+      console.log(reader.result);
+      this.imgURL = reader.result;
+      const baseArray = this.imgURL.split(',');
+      this.base64 = baseArray[1];
+    };
+  }
+
+  uploadImage() {
+    const params = {
+      title: 'Test',
+      photoBase64 : this.base64
+    };
+    this.http.post(RESTAPI.getCreatePostURL(), params).subscribe(
+      (res: Post) => {
+            console.log(res.photo);
+            this.loggedUser.posts.push(res);
+      }
+    );
   }
 
 }

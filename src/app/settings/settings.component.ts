@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit {
   changeStoryDuration(storyDuration) {
     this.storyDuration = storyDuration;
     console.log('story duration is now:', this.storyDuration);
+    localStorage.setItem('storyDur', storyDuration * 1000);
   }
 
   logout() {
