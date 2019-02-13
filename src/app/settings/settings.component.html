@@ -1,4 +1,4 @@
 <h1> Podešavanja </h1> <hr>
 <h3> Story duration time: {{ storyDuration }} seconds</h3>
 <p> Change story duration time <input id="inputStoryDuration" type=number #input (keyup.enter)="changeStoryDuration(input.value)"></p><hr>
-<button class="btn mat-button" style="background-color: red; color: white; width: 300px"> Logout </button>
+<button (click)="logout()" class="btn mat-button" style="background-color: red; color: white; width: 300px"> Logout </button>

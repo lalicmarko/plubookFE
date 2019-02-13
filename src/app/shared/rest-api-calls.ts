@@ -80,7 +80,7 @@ export abstract class RESTAPI {
 
   // GET CHAT CHANNELS
   public static getChatChannels() {
-    return this.baseUrl + '/user/getChatChannels';
+    return this.baseUrl + '/chatChannel/myConversations';
   }
 
 }

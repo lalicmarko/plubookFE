@@ -14,14 +14,11 @@ export class ProfileComponent implements OnInit {
 
   loggedUser: User;
 
-  constructor(private modalService: NgbModal,
-              private dataService: DataService) {
-    this.dataService.loggedUser.subscribe(val => {
-      this.loggedUser = val;
-    });
+  constructor(private modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
   }
 
   openStory(content) {

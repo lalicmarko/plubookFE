@@ -3,6 +3,10 @@ import {Stomp} from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import {FormControl} from '@angular/forms';
 import $ from 'jquery';
+import {HttpClient} from '@angular/common/http';
+import {RESTAPI} from '../shared/rest-api-calls';
+import {DataService} from '../shared/services/data.service';
+import {User} from '../shared/models/dto/user.model';
 
 @Component({
   selector: 'app-chat',
@@ -13,9 +17,10 @@ export class ChatComponent implements OnInit {
 
   private stompClient;
   private selectedChat;
-
+  private serverUrl = 'http://localhost:8080/socket';
   greetings: string[] = [];
-  contacts: string[] = [];
+  private channels: Object = [];
+  private loggedUser: User;
 
   tabs = ['First', 'Second', 'Third'];
   selected = new FormControl(0);
@@ -28,79 +33,52 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  removeTab(index: number) {
-    this.tabs.splice(index, 1);
+  constructor(private http: HttpClient) {
+    this.initializeWebSocketConn();
+    this.getChannels();
   }
 
-  constructor() {
-    this.connect();
-    $(function() {
-
-      /* Get all rows from your 'table' but not the first one
-       * that includes headers. */
-      const rows = $('tr').not(':first');
-
-      /* Create 'click' event handler for rows */
-      rows.on('click', function(e) {
-
-        /* Get current row */
-        const row = $(this);
-
-        /* Check if 'Ctrl', 'cmd' or 'Shift' keyboard key was pressed
-         * 'Ctrl' => is represented by 'e.ctrlKey' or 'e.metaKey'
-         * 'Shift' => is represented by 'e.shiftKey' */
-        if ((e.ctrlKey || e.metaKey) || e.shiftKey) {
-          /* If pressed highlight the other row that was clicked */
-          row.addClass('highlight');
-        } else {
-          /* Otherwise just highlight one row and clean others */
-          rows.removeClass('highlight');
-          row.addClass('highlight');
-        }
-
-      });
-
-      /* This 'event' is used just to avoid that the table text
-       * gets selected (just for styling).
-       * For example, when pressing 'Shift' keyboard key and clicking
-       * (without this 'event') the text of the 'table' will be selected.
-       * You can remove it if you want, I just tested this in
-       * Chrome v30.0.1599.69 */
-      $(document).bind('selectstart dragstart', function(e) {
-        e.preventDefault(); return false;
-      });
-
-    });
-  }
-
-  connect() {
-    const ws = new SockJS('http://localhost:8080/endpoint');
+  initializeWebSocketConn() {
+    const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
-    this.stompClient.connect({},  () => {
-      that.stompClient.subscribe('/chat', message => {
+    this.stompClient.connect({}, function(frame) {
+      that.stompClient.subscribe('/chat', (message) => {
         if (message.body) {
-          console.log(message.body);
-          this.pushMessage(message.body);
-          $('.chat').append('<div class=\'alert alert-secondary flex-wrap\'>' + message.body + '</div>');
+          const myMsg = JSON.parse(message.body);
+          for (const chn of that.channels) {
+            if (chn.name === myMsg.channelName) {
+              chn.messages.push(myMsg);
+            }
+          }
         }
       });
     });
   }
 
   sendMessage(message) {
-    if (message) {
-      this.stompClient.send('/app/send/message', {}, message);
-    }
-    $('#input').val('');
+    const msg = {
+      text : message,
+      channel : this.selectedChat.name,
+      email : this.loggedUser.email
+    };
+    this.stompClient.send('/app/send/message' , {}, JSON.stringify(msg));
   }
 
-  pushMessage(message) {
-    this.greetings.push(message);
+  getChannels() {
+    this.http.get(RESTAPI.getChatChannels()).subscribe(
+      response => {
+        console.log(response);
+        this.channels = response;
+      }, error => {
+        console.log(error);
+      }
+    );
   }
+
 
   ngOnInit(): void {
-    this.contacts = ['Marko', 'Darko', 'Honolulu', 'Parmezan'];
+    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
   }
 
   selectContact(contact) {

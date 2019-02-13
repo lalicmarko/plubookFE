@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -9,7 +10,7 @@ export class SettingsComponent implements OnInit {
 
   private storyDuration = 5; // 5 seconds is default
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -17,6 +18,10 @@ export class SettingsComponent implements OnInit {
   changeStoryDuration(storyDuration) {
     this.storyDuration = storyDuration;
     console.log('story duration is now:', this.storyDuration);
+  }
+
+  logout() {
+    this.router.navigateByUrl('/login');
   }
 
 }

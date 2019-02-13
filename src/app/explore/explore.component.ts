@@ -23,12 +23,9 @@ export class ExploreComponent implements OnInit {
   subscription = new Subscription();
 
   constructor(private http: HttpClient, private dataService: DataService) {
-    this.dataService.loggedUser.subscribe(val => {
-      this.loggedUser = val;
-      this.loggedUser.following.forEach(el => {
+    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
+    this.loggedUser.following.forEach(el => {
         this.followingIds.push(el.id);
-      });
-      console.log(this.followingIds);
     });
   }
 
