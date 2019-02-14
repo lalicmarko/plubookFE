@@ -6,6 +6,7 @@ import {User} from '../shared/models/dto/user.model';
 import {DataService} from '../shared/services/data.service';
 import {Subscription} from 'rxjs';
 import {forEach} from '@angular/router/src/utils/collection';
+import {Post} from '../shared/models/dto/post.model';
 
 @Component({
   selector: 'app-explore',
@@ -17,6 +18,7 @@ export class ExploreComponent implements OnInit {
   toShow = false;
   photoToShow;
   profileToShow: User;
+  private selectedPost: Post;
   loggedUser: User;
   profiles: User[] = [];
   followingIds = [];
@@ -78,15 +80,32 @@ export class ExploreComponent implements OnInit {
     );
   }
 
-  // unfollowUser() {
-  //
-  // }
+  unfollowUser() {
+
+  }
 
   previewPhoto(post) {
     console.log(post);
     this.photoToShow = 'http://localhost' + post.photo;
+    this.selectedPost = post;
     // this.photoToShow = photo;
   }
-  sharePhoto(photoToShow) {
+
+  sharePhoto() {
+
+    const params = new HttpParams()
+      .set('postId', String(this.selectedPost.id));
+
+    this.http.get(RESTAPI.getSharePostURL(), {params: params}).subscribe(
+      res => {
+            console.log(res);
+            const loggedUser: User = JSON.parse(localStorage.getItem('loggedUser'));
+            loggedUser.sharedPosts.push(this.selectedPost);
+            localStorage.setItem('loggedUser', JSON.stringify(loggedUser));
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

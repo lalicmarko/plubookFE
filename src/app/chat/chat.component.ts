@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Stomp} from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
-import {FormControl} from '@angular/forms';
-import $ from 'jquery';
 import {HttpClient} from '@angular/common/http';
 import {RESTAPI} from '../shared/rest-api-calls';
-import {DataService} from '../shared/services/data.service';
 import {User} from '../shared/models/dto/user.model';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-chat',
@@ -18,20 +15,8 @@ export class ChatComponent implements OnInit {
   private stompClient;
   private selectedChat;
   private serverUrl = 'http://localhost:8080/socket';
-  greetings: string[] = [];
-  private channels: Object = [];
+  private channels: any = [];
   private loggedUser: User;
-
-  tabs = ['First', 'Second', 'Third'];
-  selected = new FormControl(0);
-
-  addTab(selectAfterAdding: boolean) {
-    this.tabs.push('New');
-
-    if (selectAfterAdding) {
-      this.selected.setValue(this.tabs.length - 1);
-    }
-  }
 
   constructor(private http: HttpClient) {
     this.initializeWebSocketConn();
@@ -76,7 +61,6 @@ export class ChatComponent implements OnInit {
     );
   }
 
-
   ngOnInit(): void {
     this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
   }
@@ -87,5 +71,4 @@ export class ChatComponent implements OnInit {
       this.selectedChat = contact;
     }
   }
-
 }

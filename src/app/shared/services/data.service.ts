@@ -28,51 +28,6 @@ export class DataService {
   stompClient;
 
   constructor() {
-    // this.initializeWebSocketConnection();
   }
 
-  // initializeWebSocketConnection() {
-  //   const ws = new SockJS(RESTAPI.socketUrl);
-  //   this.stompClient = Stomp.over(ws);
-  //
-  //   const that = this;
-  //
-  //   this.stompClient.connect({}, function frame() {
-  //     that.stompClient.subscribe('/chat', (response) => {
-  //         const message: Message = JSON.parse(response.body);
-  //
-  //         if (message) {
-  //           that.messageSource.next(message);
-  //         }
-  //     });
-  //   });
-  // }
-
-  sendMessage(message) {
-    this.stompClient.send('/app/send/message', {}, message);
-  }
-
-  changeLoggedUser(user: User) {
-    this.loggedUserSource.next(user);
-  }
-
-  changeVisitedUser(user: User) {
-    this.visitedUserSource.next(user);
-  }
-
-  changeSearchedUsers(users: User[]) {
-    this.searchedUsersSource.next(users);
-  }
-
-  changePostsOfFriends(posts: Post[]) {
-    this.postsOfFriendsSource.next(posts);
-  }
-
-  changeChatChannels (chatChannels: ChatChannel[]) {
-    this.chatChannelsSource.next(chatChannels);
-  }
-
-  changeMessage(message: Message) {
-    this.messageSource.next(message);
-  }
 }

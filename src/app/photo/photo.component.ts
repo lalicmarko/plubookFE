@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {Post} from '../shared/models/dto/post.model';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {RESTAPI} from '../shared/rest-api-calls';
+import {Comment} from '../shared/models/dto/comment.model';
 
 @Component({
   selector: 'app-photo',
@@ -26,7 +27,7 @@ export class PhotoComponent implements OnInit {
         content: comment
       };
       this.http.post(RESTAPI.getPostCommentUrl(), params).subscribe(
-        res => {
+        (res: Comment) => {
           console.log(res);
           this.post.totalCommments += 1;
           this.post.comments.push(res);
@@ -40,9 +41,10 @@ export class PhotoComponent implements OnInit {
   }
 
   addLike () {
-    const params = {
-      postId: this.post.id
-    };
+
+    const params = new HttpParams()
+      .set('postId', String(this.post.id));
+
     this.http.get(RESTAPI.getLikePostURL(), {params: params}).subscribe(
       res => {
         console.log(res);

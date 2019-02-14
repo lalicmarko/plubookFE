@@ -65,17 +65,12 @@ export abstract class RESTAPI {
 
   // SHARE POST
   public static getSharePostURL() {
-    return this.baseUrl + '/post/sharePost';
+    return this.baseUrl + '/post/share';
   }
 
   // POST COMMENT
   public static getPostCommentUrl() {
     return this.baseUrl + '/post/addComment';
-  }
-
-  // GET FRIEND POSTS
-  public static getFriendPosts() {
-    return this.baseUrl + '/post/findTop50';
   }
 
   // GET CHAT CHANNELS

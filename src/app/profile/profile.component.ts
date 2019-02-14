@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   loggedUser: User;
   private interval;
   private imgURL;
+  private title;
   private base64;
   imageSources = [
     'assets/photo1.jpg',
@@ -50,15 +51,27 @@ export class ProfileComponent implements OnInit {
     };
   }
 
+  onTitleChanged() {
+    console.log(this.title);
+  }
+
   uploadImage() {
     const params = {
-      title: 'Test',
+      title: this.title,
       photoBase64 : this.base64
     };
+
+    if (this.imgURL.length < 3) {
+
+    }
+
     this.http.post(RESTAPI.getCreatePostURL(), params).subscribe(
       (res: Post) => {
             console.log(res.photo);
             this.loggedUser.posts.push(res);
+      },
+      error => {
+        console.log(error);
       }
     );
   }

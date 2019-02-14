@@ -28,14 +28,14 @@ const appRoutes: Routes = [
   { path: 'feed', component: FeedComponent},
   { path: 'settings', component: SettingsComponent},
   { path: 'explore', component: ExploreComponent},
+  { path: '', redirectTo: '/chat', pathMatch: 'full'},
+  { path: '**', component: LoginComponent }
   // { path: 'hero/:id',      component: HeroDetailComponent },
   // {
   //   path: 'heroes',
   //   component: HeroListComponent,
   //   data: { title: 'Heroes List' }
   // },
-  { path: '', redirectTo: '/chat', pathMatch: 'full'},
-  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({

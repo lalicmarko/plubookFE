@@ -8,6 +8,7 @@
   </div>
   <div class="jumbotron">
     <input type="file" (change)="onFileChanged($event)">
+    <input type="text" placeholder="Naslov slike" [(ngModel)]="title" (change)="onTitleChanged()"/>
     <br>
     <br>
     <img [src]="imgURL" height="200" width="200" *ngIf="imgURL">
@@ -19,9 +20,13 @@
     <h3> My photos </h3> <hr>
     <img *ngFor="let post of loggedUser.posts" src="http://localhost{{post.photo}}" width="300" height="300">
   </div>
-  <div class="profile-content">
 
+  <div class="jumbotron" style="overflow-x: auto">
+    <h3> Shared photos </h3> <hr>
+    <img *ngFor="let post of loggedUser.sharedPosts" src="http://localhost{{post.photo}}" width="300" height="300">
   </div>
+
+
 </div>
 
 <ng-template #content let-modal>
@@ -37,7 +42,7 @@
                [minHeight]="'525px'"
                [autoPlay]="true"
                [showArrows]="false"
-               [autoPlayInterval]="interval"
+               [autoPlayInterval]="5000"
                [imageUrls]="imageSources"
                [lazyLoad]="imageSources?.length > 1"
                [autoPlayWaitForLazyLoad]="true">
